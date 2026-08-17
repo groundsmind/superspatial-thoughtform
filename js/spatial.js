@@ -10,16 +10,13 @@ var afroot = document.querySelector('#root')
 
 var textureMap = {
     '0': {
-        texture: 'empty',
-        color: "#FF00FF"
+        texture: 'empty'
     },
     '1': {
-        texture: 'occupied',
-        color: "#00FFFF"
+        texture: 'occupied'
     },
     '2': {
-        texture: 'ozo',
-        color: "#FFFF00"
+        texture: 'ozo'
     }
 }
 
@@ -27,8 +24,8 @@ function placeTile(tileData)
 {
     var tile = document.createElement('a-plane');
     tile.setAttribute('rotation', "-90 0 0");
-    tile.setAttribute('color', tileData.color);
-    //tile.setAttribute('src', "img/tiles/"+tileData.texture+".png");
+    tile.setAttribute('roughness', "1");
+    tile.setAttribute('src', "/img/tiles/"+tileData.texture+".png");
     tile.setAttribute('position', tileData.position);
     afroot.append(tile);
 }
@@ -43,8 +40,7 @@ function placePlan(schema)
         let currentTile = textureMap[char]
         let tileData = {
             position: tx + ' 0 ' + ty, 
-            color: currentTile.color
-            //texture: textureMap[char] 
+            texture: currentTile.texture 
         }
         placeTile(tileData)
         tx++
@@ -52,14 +48,12 @@ function placePlan(schema)
     }
 }
 
-placePlan(
-    {
-    size: 5,
-    plan: `
+var testPlan = {size: 5, plan: `
     00000
     01110
     01210
     01120
     00000`
-    }
-);
+}
+
+placePlan(testPlan);
